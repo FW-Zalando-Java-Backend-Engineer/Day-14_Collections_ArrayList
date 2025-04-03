@@ -1,148 +1,122 @@
-# **📘 Day-14: Java Collections – ArrayList & LinkedList**  
-Welcome to **Day-14** of our Java learning journey! Today, we dive into one of the most **powerful tools** in Java – the **Collections Framework**, with a deep focus on **List implementations: ArrayList and LinkedList**.
+# **📘 Day-14: Java Collections – ArrayList**  
+Welcome to **Day-14** of our Java learning journey! Today, we focused on one of the most useful and commonly used data structures in Java: the **`ArrayList`**, a part of the **Java Collections Framework (JCF)**.
 
 ---
 
 ## **📌 Lesson Structure**
 
-### **1️⃣ What is Java Collections Framework (JCF)?**
-- A **standard architecture** to store and manipulate groups of objects.
-- Provides **ready-to-use data structures** such as **List**, **Set**, **Map**, and **Queue**.
-- **Key Benefits**:
-  - Reduces programming effort.
-  - Increases performance and efficiency.
-  - Promotes code reusability.
+### **1️⃣ Introduction to Java Collections Framework (JCF)**
+- A set of **interfaces and classes** for managing groups of objects.
+- Introduced to overcome the **limitations of arrays** (fixed size, limited functionality).
+- Encourages the use of **dynamic, type-safe, reusable data structures**.
 
-### **2️⃣ Why Use Collections Instead of Arrays?**
-- Collections are **dynamic in size**.
-- Offer **powerful APIs** for searching, sorting, and manipulating data.
-- Arrays are **fixed in size** and lack flexibility and utility methods.
-
-### **3️⃣ Java Collections Interfaces**
-- **List** – Ordered, allows duplicates.
-- **Set** – No duplicates, unordered.
-- **Map** – Key-value pairs, unique keys.
-- **Queue** – Follows FIFO principle.
-
-📌 *Today’s focus is on the `List` interface.*
+### **2️⃣ What is an ArrayList?**
+- A **resizable array** implementation of the `List` interface.
+- Allows **duplicate elements**, **maintains insertion order**, and provides **indexed access**.
+- Part of `java.util` package.
 
 ---
 
-## **📂 List Interface Overview**
-- An **ordered collection** of elements.
-- Elements can be **accessed via index**.
-- **Allows duplicates**.
-- Common Implementations:
-  - `ArrayList`
-  - `LinkedList`
-  - `Vector` *(legacy)*
-  - `Stack` *(legacy)*
+## **🧠 Key Features of ArrayList**
+
+| Feature                    | Description                              |
+|----------------------------|------------------------------------------|
+| ✅ Dynamic Sizing           | Automatically resizes as elements are added. |
+| 🔢 Indexed Access          | Fast access via index: `get(int index)` is O(1). |
+| ➕ Allows Duplicates       | Yes                                      |
+| ⚠️ Slower Insertion/Removal | Especially in the middle/start – O(n).     |
+| 📈 Default Capacity        | 10 elements (internally managed).        |
 
 ---
 
-## **🧱 ArrayList Basics**
-- Backed by a **resizable array**.
-- Ideal for **random access** (e.g., `get(int index)` is **O(1)**).
-- Less efficient for **insertion/removal** in the middle/start (**O(n)**).
-- Default initial capacity is **10**, can be manually increased using `ensureCapacity()`.
+## **🧪 Live Coding Demo: Favorite Foods Tracker**
 
----
-
-## **🔗 LinkedList Basics**
-- Backed by a **doubly-linked list**.
-- Efficient at **insertions/removals** at the start/middle (**O(1)** at head).
-- Slower for **random access** (e.g., `get(int index)` is **O(n)**).
-- Higher memory overhead due to **node objects** (element + prev/next references).
-
----
-
-## **⚖️ ArrayList vs LinkedList Comparison**
-
-| Operation             | ArrayList      | LinkedList     |
-|----------------------|----------------|----------------|
-| Random Access         | ✅ O(1)         | ❌ O(n)         |
-| Insertion at End      | ✅ O(1)*        | ✅ O(1)         |
-| Insertion at Start    | ❌ O(n)         | ✅ O(1)         |
-| Memory Overhead       | ✅ Lower        | ❌ Higher       |
-
-> 🧠 *Use ArrayList for fast access, use LinkedList for frequent inserts/deletes!*
-
----
-
-## **🧪 Live Coding Examples**
-
-### **🖥️ ArrayList Example**
 ```java
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class ArrayListDemo {
+public class FavoriteFoodsApp {
     public static void main(String[] args) {
-        ArrayList<String> fruits = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<String> favoriteFoods = new ArrayList<>();
+        boolean running = true;
 
-        fruits.add("Apple");
-        fruits.add("Banana");
-        fruits.add("Mango");
+        System.out.println("🍽️ Welcome to the Favorite Foods Tracker!");
 
-        System.out.println("Fruits: " + fruits);
-        System.out.println("First Fruit: " + fruits.get(0));
+        while (running) {
+            System.out.println("\nChoose an option:");
+            System.out.println("1. Add a food");
+            System.out.println("2. Remove a food");
+            System.out.println("3. View favorite foods");
+            System.out.println("4. Exit");
+            System.out.print("👉 Your choice: ");
 
-        fruits.remove("Banana");
-        System.out.println("After Removal: " + fruits);
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter food to add: ");
+                    String newFood = scanner.nextLine();
+                    favoriteFoods.add(newFood);
+                    System.out.println(newFood + " added to your favorites!");
+                    break;
+                case 2:
+                    System.out.print("Enter food to remove: ");
+                    String removeFood = scanner.nextLine();
+                    if (favoriteFoods.remove(removeFood)) {
+                        System.out.println(removeFood + " removed.");
+                    } else {
+                        System.out.println(removeFood + " not found.");
+                    }
+                    break;
+                case 3:
+                    if (favoriteFoods.isEmpty()) {
+                        System.out.println("Your list is empty!");
+                    } else {
+                        System.out.println("🍕 Your Favorite Foods:");
+                        for (int i = 0; i < favoriteFoods.size(); i++) {
+                            System.out.println((i + 1) + ". " + favoriteFoods.get(i));
+                        }
+                    }
+                    break;
+                case 4:
+                    running = false;
+                    System.out.println("👋 Goodbye! Stay hungry!");
+                    break;
+                default:
+                    System.out.println("❌ Invalid choice.");
+            }
+        }
+
+        scanner.close();
     }
 }
 ```
 
-**📝 Expected Output:**
-```
-Fruits: [Apple, Banana, Mango]
-First Fruit: Apple
-After Removal: [Apple, Mango]
-```
-
 ---
 
-### **🖥️ LinkedList Example**
-```java
-import java.util.LinkedList;
+## **🎯 Hands-on Assignment**
+👨‍💻 **Assignment: Movie Watchlist App using ArrayList**  
+You’ll create a dynamic Java console app where users can:
+- Add movie titles
+- Remove watched ones
+- View the current list
+- Count how many are left
 
-public class LinkedListDemo {
-    public static void main(String[] args) {
-        LinkedList<String> cities = new LinkedList<>();
-
-        cities.add("Berlin");
-        cities.addFirst("Amsterdam");
-        cities.addLast("Zurich");
-
-        System.out.println("Cities: " + cities);
-        cities.removeFirst();
-        System.out.println("After removing first: " + cities);
-    }
-}
-```
-
-**📝 Expected Output:**
-```
-Cities: [Amsterdam, Berlin, Zurich]
-After removing first: [Berlin, Zurich]
-```
-
----
-
-## **🎯 Hands-on Exercises**
-✅ Create a `List` of your 5 favorite movies using **ArrayList**, print them, then sort them alphabetically.  
-✅ Implement a **Queue behavior** (FIFO) using **LinkedList**.  
-✅ Try inserting elements at the start, middle, and end of both ArrayList and LinkedList – compare performance.  
-✅ Explore the use of `ensureCapacity()` in ArrayList.
+**👉 [Assignment Link on GitHub Classroom](_to be added_)**
 
 ---
 
 ## **📚 Additional Resources**
-- **[Collections Overview – Oracle Docs](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html)**
-- **[List Interface – Oracle Docs](https://docs.oracle.com/javase/8/docs/api/java/util/List.html)**
-- **[ArrayList vs LinkedList – GeeksForGeeks](https://www.geeksforgeeks.org/arraylist-vs-linkedlist-java/)**
-- [Video Lesson Recording](_will be added later_)
+- [ArrayList – Oracle Docs](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html)
+- [ArrayList vs LinkedList – GeeksForGeeks](https://www.geeksforgeeks.org/arraylist-vs-linkedlist-java/)
+- [Java Collections Overview](https://docs.oracle.com/javase/tutorial/collections/intro/index.html)
+- [Video Recording](_to be added_)
+- [Lesson Slides: ArrayList Deep Dive](_to be added_)
 
 ---
 
-🚀 **Great work reaching Day-14! Collections are the bread and butter of Java devs – and way more fun than debugging PHP 😄**  
-Keep practicing and get ready for the next challenge!
+🚀 **Awesome work today! Mastering ArrayList gives you a real edge in writing clean, efficient Java code.**  
+Tomorrow, we’ll dive into `LinkedList` and compare the two like pros! 💪
+
