@@ -113,7 +113,7 @@ You’ll create a dynamic Java console app where users can:
 - [ArrayList vs LinkedList – GeeksForGeeks](https://www.geeksforgeeks.org/arraylist-vs-linkedlist-java/)
 - [Java Collections Overview](https://docs.oracle.com/javase/tutorial/collections/intro/index.html)
 - [Video Recording](_to be added_)
-- [Lesson Slides: ArrayList Deep Dive](_to be added_)
+
 
 ---
 
