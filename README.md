@@ -112,7 +112,7 @@ You’ll create a dynamic Java console app where users can:
 - [ArrayList – Oracle Docs](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html)
 - [ArrayList vs LinkedList – GeeksForGeeks](https://www.geeksforgeeks.org/arraylist-vs-linkedlist-java/)
 - [Java Collections Overview](https://docs.oracle.com/javase/tutorial/collections/intro/index.html)
-- [Video Recording](_to be added_)
+- [Video Recording](https://us06web.zoom.us/rec/share/n4bYRGT3Mi51Vfr682eJGeb0uKQByAK7t1Mv_-X2QUTYpna8XHLsPqMBh8TAM3BV.LbJlZervNxhLW41F?startTime=1743664573000)
 - [Lesson Live coding](https://github.com/FW-Zalando-Java-Backend-Engineer/Day-14_Collections/tree/main/Day_14)
 
 
